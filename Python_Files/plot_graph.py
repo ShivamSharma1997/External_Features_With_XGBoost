@@ -1,3 +1,4 @@
+import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -10,3 +11,5 @@ for vec in time_loss:
     y_labels.append(vec[0])
 
 plt.plot(x_labels, y_labels)
+plt.savefig('../graphs/LS.png')
+Image.open('../graphs/LS.png').save('../graphs/LS.jpg','JPEG')
