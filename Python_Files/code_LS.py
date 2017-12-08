@@ -103,9 +103,9 @@ np.save('../Extracted_Features/label', index)
 
 ############### SAVING TIME TAKEN AND XGBOOST BEST LOG LOSS ###############
 
-bst_loss = xgb_bst(x_train, index)
-
 end_time = time()
+
+bst_loss = xgb_bst(x_train, index)
 
 new_time_loss = [bst_loss, (end_time-start_time)]
 

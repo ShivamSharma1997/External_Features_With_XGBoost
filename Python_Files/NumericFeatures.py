@@ -4,16 +4,14 @@ import pandas as pd
 
 from time import time
 from fuzzywuzzy import fuzz
+from nltk.corpus import stopwords
 from scipy.stats import skew, kurtosis
 from utility import clean, tokenize, xgb_bst
 from scipy.spatial.distance import cosine, cityblock, jaccard, canberra, euclidean, minkowski, braycurtis
 
 start_time = time()
 
-f = open("..\..\english")
-stop_words=[]
-for word in f:
-    stop_words.append(word[:-1])
+stop_words = stopwords.words('english')
 
 ############### EXTRACTING AND CLEANING DATASET ###############
 if flag:
@@ -55,7 +53,7 @@ try:
     word = wordVec_model['word']
     print 'using loaded model.....'
 except:
-    wordVec_model = gensim.models.KeyedVectors.load_word2vec_format("..\..\GoogleNews-vectors-negative300.bin.gz",binary=True)
+    wordVec_model = gensim.models.KeyedVectors.load_word2vec_format("..\..\..\GoogleNews-vectors-negative300.bin.gz",binary=True)
 
 
 ############### EXTRACTING FEATURES ###############
@@ -204,9 +202,9 @@ np.save('../Extracted_Features/label', index)
 
 ############### SAVING TIME TAKEN AND XGBOOST BEST LOG LOSS ###############
 
-bst_loss = xgb_bst(data, index)
-
 end_time = time()
+
+bst_loss = xgb_bst(data, index)
 
 new_time_loss = [bst_loss, (end_time-start_time)]
 

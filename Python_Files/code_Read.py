@@ -76,7 +76,7 @@ for i in range(len(q1_train)):
     DaleChall_Q1.append(read.DaleChall(q1_train[i]))
     DaleChall_Q2.append(read.DaleChall(q2_train[i]))
     ED_Dist.append(read.EditDist_Dist(q1_train[i], q2_train[i]))
-#    ED_Noun.append(read.EditDist_Noun(q1_train[i], q2_train[i]))
+    ED_Noun.append(read.EditDist_Noun(q1_train[i], q2_train[i]))
     LCS_Len.append(read.LCS_Len(q1_train[i], q2_train[i]))
     LCW.append(read.LCW(q1_train[i], q2_train[i]))
     
@@ -97,7 +97,7 @@ x_train['CWPS_Q2'] = CWPS_Q2
 x_train['DaleChall_Q1'] = DaleChall_Q1
 x_train['DaleChall_Q2'] = DaleChall_Q2
 x_train['ED_Dist'] = ED_Dist
-#x_train['ED_Noun'] = ED_Noun
+x_train['ED_Noun'] = ED_Noun
 x_train['LCS_Len'] = LCS_Len
 x_train['LCW'] = LCW
 
@@ -106,9 +106,9 @@ np.save('../Extracted_Features/label', index)
 
 ############### SAVING TIME TAKEN AND XGBOOST BEST LOG LOSS ###############
 
-bst_loss = xgb_bst(x_train, index)
-
 end_time = time()
+
+bst_loss = xgb_bst(x_train, index)
 
 new_time_loss = [bst_loss, (end_time-start_time)]
 
